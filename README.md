@@ -23,7 +23,7 @@
 ### 1. Test Case 1 — Two-Segment Bar with Dual Axial Forces
 *Geometry:* $L = [100, 100]\,\text{mm}$, $D = [50.463, 35.682]\,\text{mm}$ | *Loads:* $F_1 = +20\,\text{kN}$ at $x = 50\,\text{mm}$, $F_2 = +20\,\text{kN}$ at $x = 150\,\text{mm}$
 
-![Test Case 1 — Dual Axial Forces](docs/screenshots/01_test_case_1_dual_loads.png)
+![Test Case 1](docs/Output_Data_Analysis/MATLAB%20ZAD1.png)
 
 ### 2. Test Case 2 — Three-Segment Stepped Bar
 *Geometry:* $L = [100, 100, 100]\,\text{mm}$, $D = [30, 15, 10]\,\text{mm}$ | *Load:* $F_1 = -29\,\text{kN}$ at $x = 100\,\text{mm}$
