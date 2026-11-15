@@ -6,7 +6,7 @@
 
 **Axial Stress Solver** is an engineering desktop application for the static and thermo-mechanical analysis of stepped cylindrical bars fixed at both ends. It combines a fast **1D Finite Element Method (FEM) solver written in C** with an interactive **3D pre- and post-processing GUI built in MATLAB**.
 
-![Axial Stress Solver Overview](docs/screenshots/01_test_case_1_dual_loads.png)
+![Axial Stress Solver Overview](Output_Data_Analysis/Test%20Case%201/MATLAB%20ZAD1.png)
 
 ## Key Features
 
@@ -18,22 +18,25 @@
   * Post-processing 3D stress contour plot (`jet` colormap) with auto-scaled axial deformation and wireframe toggle.
 * **Engineering Diagrams:** Generates clean 2D distributions for **Axial Displacement** $u(x)$, **Internal Axial Force** $N(x)$, and **Normal Stress** $\sigma(x)$, along with support reactions $R_A$ and $R_B$.
 
-## Application Screenshots
+## Benchmark Test Cases & Screenshots
 
 ### 1. Test Case 1 — Two-Segment Bar with Dual Axial Forces
-*Geometry:* $L = [100, 100]\,\text{mm}$, $D = [50.463, 35.682]\,\text{mm}$ | *Loads:* $F_1 = +20\,\text{kN}$ at $x = 50\,\text{mm}$, $F_2 = +20\,\text{kN}$ at $x = 150\,\text{mm}$
+* **Geometry:** $L = [100, 100]\,\text{mm}$, $D = [50.463, 35.682]\,\text{mm}$ | **Loads:** $F_1 = +20\,\text{kN}$ at $x = 50\,\text{mm}$, $F_2 = +20\,\text{kN}$ at $x = 150\,\text{mm}$
+* **Files:** [Test Case 1 Folder](Output_Data_Analysis/Test%20Case%201/) | [Analytical Hand Calculation 1](Output_Data_Analysis/Test%20Case%201/Analytical_Hand_Calculation%201.pdf)
 
-![Test Case 1](docs/Output_Data_Analysis/MATLAB%20ZAD1.png)
+![Test Case 1 — Dual Axial Forces](Output_Data_Analysis/Test%20Case%201/MATLAB%20ZAD1.png)
 
 ### 2. Test Case 2 — Three-Segment Stepped Bar
-*Geometry:* $L = [100, 100, 100]\,\text{mm}$, $D = [30, 15, 10]\,\text{mm}$ | *Load:* $F_1 = -29\,\text{kN}$ at $x = 100\,\text{mm}$
+* **Geometry:** $L = [100, 100, 100]\,\text{mm}$, $D = [30, 15, 10]\,\text{mm}$ | **Load:** $F_1 = -29\,\text{kN}$ at $x = 100\,\text{mm}$
+* **Files:** [Test Case 2 Folder](Output_Data_Analysis/Test%20Case%202/) | [Analytical Hand Calculation 2](Output_Data_Analysis/Test%20Case%202/Analytical_Hand_Calculation%202.pdf)
 
-![Test Case 2 — Three-Segment Stepped Bar](docs/screenshots/02_test_case_2_stepped_bar.png)
+![Test Case 2 — Three-Segment Stepped Bar](Output_Data_Analysis/Test%20Case%202/MATLAB%20ZAD2.png)
 
 ### 3. Test Case 3 — Combined Mechanical & Thermal Loading ($\Delta T = +20\,^\circ\text{C}$)
-*Geometry:* $L = [30, 30, 45]\,\text{mm}$, $D = [31.915, 31.915, 22.568]\,\text{mm}$ | *Loads:* $F_1 = +20\,\text{kN}$ at $x = 30\,\text{mm}$, $\alpha = 12 \times 10^{-6}/^\circ\text{C}$, $\Delta T = +20\,^\circ\text{C}$
+* **Geometry:** $L = [30, 30, 45]\,\text{mm}$, $D = [31.915, 31.915, 22.568]\,\text{mm}$ | **Loads:** $F_1 = +20\,\text{kN}$ at $x = 30\,\text{mm}$, $\alpha = 12 \times 10^{-6}/^\circ\text{C}$, $\Delta T = +20\,^\circ\text{C}$
+* **Files:** [Test Case 3 Folder](Output_Data_Analysis/Test%20Case%203/) | [Analytical Hand Calculation 3](Output_Data_Analysis/Test%20Case%203/Analytical_Hand_Calculation%203.pdf)
 
-![Test Case 3 — Combined Mechanical and Thermal Loading](docs/screenshots/03_test_case_3_thermal_load.png)
+![Test Case 3 — Combined Mechanical and Thermal Loading](Output_Data_Analysis/Test%20Case%203/MATLAB%20ZAD3.png)
 
 ## Mathematical Formulation & Workflow
 
@@ -45,7 +48,9 @@ $$
 
 Fixed boundary conditions at both ends ($U_1 = 0$, $U_N = 0$) are enforced using the **Penalty Method** (multiplying end-node diagonal stiffness entries by $10^{15}$), and the resulting system is solved via **Gaussian Elimination**.
 
-For full mathematical derivations, matrix assembly details, and unit consistency tables, refer to [`docs/Theoretical_Background_and_FEM_Formulation.pdf`](docs/Theoretical_Background_and_FEM_Formulation.pdf).
+For full mathematical derivations, matrix assembly details, and unit consistency tables, refer to:
+* **English Documentation:** [`Output_Data_Analysis/Theoretical Background and FEM Formulation.pdf`](Output_Data_Analysis/Theoretical%20Background%20and%20FEM%20Formulation.pdf)
+* **Serbian Documentation:** [`Output_Data_Analysis/Teorijska osnova.pdf`](Output_Data_Analysis/Teorijska%20osnova.pdf)
 
 ### Execution Pipeline
 
@@ -55,7 +60,7 @@ For full mathematical derivations, matrix assembly details, and unit consistency
 
 ## Verification & Validation
 
-The C 1D FEM solver was verified against hand-calculated analytical solutions (force method / superposition) and cross-checked against 3D finite element simulations (**ANSYS 3D FEM**) across three benchmark cases:
+The C 1D FEM solver was verified against hand-calculated analytical solutions (force method / superposition) and cross-checked against 3D finite element simulations (**ANSYS 3D FEM**) across all three benchmark cases:
 
 | Benchmark Case | Key Parameter | Analytical | C 1D FEM Solver | 1D Error | ANSYS 3D FEM | ANSYS 3D Diff. |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -68,27 +73,29 @@ The C 1D FEM solver was verified against hand-calculated analytical solutions (f
 
 > **Engineering Note on 1D vs. 3D FEM:** The C/MATLAB solver is based on classical 1D uniaxial bar theory ($\sigma_x = E \varepsilon_x$) and therefore reproduces analytical solutions with **$0.00\%$ numerical error**. In contrast, 3D solid elements in ANSYS account for **Poisson's ratio ($\nu \approx 0.3$)** — lateral contraction/expansion is constrained at the rigid end walls and stepped diameter transitions, producing a localized triaxial stress state and a minor $\approx 1.8\%$ difference relative to 1D theory.
 
-* Detailed error tables and comparison charts: [`Output_Data_Analysis/Error_Analysis_Table.xlsx`](Output_Data_Analysis/Error_Analysis_Table.xlsx)
-* Hand-written analytical derivations & benchmark test cases: [`Output_Data_Analysis/`](Output_Data_Analysis/)
+* **Detailed Error Tables & Charts:** [`Output_Data_Analysis/Error_Analysis_Table.xlsx`](Output_Data_Analysis/Error_Analysis_Table.xlsx)
+* **All Verification Files & Hand Calculations:** [`Output_Data_Analysis/`](Output_Data_Analysis/)
 
 ## Repository Structure
 
 ```text
 Axial-Stress-Solver-1D-FEM/
-├── SolverApp.m                                         # MATLAB GUI, 3D visualization & I/O handler
-├── math.c                                              # C source code for 1D FEM solver & Gaussian elimination
-├── README.md                                           # Project documentation
-├── docs/
-│   ├── Theoretical_Background_and_FEM_Formulation.pdf  # Mathematical formulation & matrix equations
-│   └── screenshots/
-│       ├── 01_test_case_1_dual_loads.png               # Test Case 1 GUI output
-│       ├── 02_test_case_2_stepped_bar.png              # Test Case 2 GUI output
-│       └── 03_test_case_3_thermal_load.png             # Test Case 3 GUI output (thermal + mechanical)
+├── SolverApp.m                                                 # MATLAB GUI, 3D visualization & I/O handler
+├── math.c                                                      # C source code for 1D FEM solver & Gaussian elimination
+├── README.md                                                   # Project documentation
 └── Output_Data_Analysis/
-    ├── Error_Analysis_Table.xlsx                       # Analytical vs. 1D FEM vs. ANSYS 3D comparison
-    ├── Test_Case_1/                                    # Analytical & numerical files for Case 1
-    ├── Test_Case_2/                                    # Analytical & numerical files for Case 2
-    └── Test_Case_3/                                    # Analytical & numerical files for Case 3
+    ├── Theoretical Background and FEM Formulation.pdf          # Mathematical formulation (English)
+    ├── Teorijska osnova.pdf                                    # Mathematical formulation (Serbian)
+    ├── Error_Analysis_Table.xlsx                               # Analytical vs. 1D FEM vs. ANSYS 3D comparison
+    ├── Test Case 1/
+    │   ├── Analytical_Hand_Calculation 1.pdf                   # Hand-written derivation for Case 1
+    │   └── MATLAB ZAD1.png                                     # GUI & diagram output for Case 1
+    ├── Test Case 2/
+    │   ├── Analytical_Hand_Calculation 2.pdf                   # Hand-written derivation for Case 2
+    │   └── MATLAB ZAD2.png                                     # GUI & diagram output for Case 2
+    └── Test Case 3/
+        ├── Analytical_Hand_Calculation 3.pdf                   # Hand-written derivation for Case 3
+        └── MATLAB ZAD3.png                                     # GUI & diagram output for Case 3
 ```
 
 ## Getting Started
