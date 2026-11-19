@@ -73,7 +73,7 @@ The C 1D FEM solver was verified against hand-calculated analytical solutions (f
 
 > **Engineering Note on 1D vs. 3D FEM:** The C/MATLAB solver is based on classical 1D uniaxial bar theory ($\sigma_x = E \varepsilon_x$) and therefore reproduces analytical solutions with **$0.00\%$ numerical error**. In contrast, 3D solid elements in ANSYS account for **Poisson's ratio ($\nu \approx 0.3$)** — lateral contraction/expansion is constrained at the rigid end walls and stepped diameter transitions, producing a localized triaxial stress state and a minor $\approx 1.8\%$ difference relative to 1D theory.
 
-* **Detailed Error Tables & Charts:** [`Output_Data_Analysis/Error_Analysis_Table.xlsx`](Output_Data_Analysis/Error_Analysis_Table.xlsx)
+* **Detailed Diff Tables & Charts:** [`Output_Data_Analysis/Diff_Analysis_Table.xlsx`](Output_Data_Analysis/Diff_Analysis_Table.xlsx)
 * **All Verification Files & Hand Calculations:** [`Output_Data_Analysis/`](Output_Data_Analysis/)
 
 ## Repository Structure
